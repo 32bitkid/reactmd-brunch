@@ -12,8 +12,18 @@ class ReactMDBrunch {
     const output = `'use strict';
 var React = require('react');
 var ReactMarkdown = require('react-markdown');
+
+var matcher = /{{(\w+?)}}/g;
+var raw = ${JSON.stringify(data)};
+
 module.exports = function Markdown(iprops) {
-  const props = Object.assign({}, iprops, { source: ${JSON.stringify(data)} })
+  var replacements = iprops.replacements;
+  var source = (replacements) ? raw.replace(matcher, (_, key) => replacements[key] || key) : raw;
+  var rest = Object.keys(iprops).reduce((obj, key) => {
+    if (key !== 'replacements') { obj[key] = iprops[key]; }
+    return obj;
+  }, {});
+  var props = Object.assign({}, rest, { source });
   return React.createElement(ReactMarkdown, props);
 };`
     return Promise.resolve(output);
