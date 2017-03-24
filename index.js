@@ -13,7 +13,7 @@ class ReactMDBrunch {
 var React = require('react');
 var ReactMarkdown = require('react-markdown');
 
-var matcher = /{{(\w+?)}}/g;
+var matcher = /{{(\\w+?)}}/g;
 var raw = ${JSON.stringify(data)};
 
 module.exports = function Markdown(iprops) {
