@@ -18,7 +18,7 @@ var raw = ${JSON.stringify(data)};
 
 module.exports = function Markdown(iprops) {
   var replacements = iprops.replacements;
-  var source = (replacements) ? raw.replace(matcher, (_, key) => replacements[key] || key) : raw;
+  var source = (replacements) ? raw.replace(matcher, (_, key) => replacements[key] || ("{{" + key + "}}") : raw;
   var rest = Object.keys(iprops).reduce((obj, key) => {
     if (key !== 'replacements') { obj[key] = iprops[key]; }
     return obj;
