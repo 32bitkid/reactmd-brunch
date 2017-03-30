@@ -26,7 +26,7 @@ module.exports = function Markdown(iprops) {
     if (key !== 'replacements') { obj[key] = iprops[key]; }
     return obj;
   }, {});
-  var props = Object.assign({}, rest, { source });
+  var props = Object.assign({}, rest, { source: source });
   return React.createElement(ReactMarkdown, props);
 };`
     return Promise.resolve(output);
